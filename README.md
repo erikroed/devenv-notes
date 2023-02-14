@@ -178,7 +178,7 @@ Insert following yml code:
 - name: Add user to docker group
   become: yes
   user:
-    name: "{{ lookup('env', 'USER') }}"
+    name: "{{ lookup('env', 'USER') | default('dev', true) }}"
     groups: docker
     append: yes
   tags:
