@@ -34,7 +34,7 @@ The `DEBIAN_FRONTEND` env is set so the baseimage (Ubuntu:22.04) can be build wi
 
 Furthermore, when building containers with this image, we will get the necessary tools like git and ansible.
 The build will also copy all of our files into the container, so we can jump straight into the container and run the
-playbook without no need for more setup.
+playbook without no need for more setup. Instead of re-building everytime there is a change, we can use volume mounting in docker instead, but I don't have any example on this for this demo. 
 
 So let's give it a try. To make this process a bit easier for ourselves we will create 
 one more helper script `docker-build.sh`
