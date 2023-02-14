@@ -1,10 +1,22 @@
 # devenv-notes
 Notes to NC Global Tech Talk
 
+# Create and navigate to folder
+
+```bash
+mkdir devenv && cd devenv
+```
+
 # Install script
 
 Bash file to make it easy to install Ansible on a new computer.
 
+Create file:
+```bash
+vi install-ansible.sh
+```
+
+Add installation script:
 ```bash
 #!/usr/bin/bash
 
@@ -28,13 +40,23 @@ else
 fi
 ```
 
+Make the file executable:
+```bash
+chmod +x install-ansible.sh
+```
+
+Now, let's install ansible on the computer and get started to automate our own dev environment.
+
+```bash
+./install-ansible.sh
+```
+
 # Create playbook
 
 We will create a really simple playbook to get us quick up and running.
 First we want to create a playbook that's prints the default Hello World.
 
 ```bash
-mkdir devenv
 vi install.yml
 ```
 
