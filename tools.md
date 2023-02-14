@@ -90,5 +90,53 @@ For the IDE, we will write a task that installs [Jetbrains IntelliJ IDEA](https:
 Paste the following yml config in `tasks/ide.yml`
 
 ```yml
+- name: Create folder for installation files if it doesn't exist
+  file:
+    path: /opt/idea
+    state: directory
+    mode: '0755'
+  tags:
+    - ide
 
+- name: Download IntelliJ IDEA Community Edition tarball
+  get_url:
+    url: https://download.jetbrains.com/idea/ideaIC-2022.3.2.tar.gz?_ga=2.151419696.80785005.1676413469-1496090286.1676413469
+    dest: /opt/idea/idea.tar.gz
+  tags:
+    - ide
+
+- name: Extract tarfile
+  unarchive:
+    src: /opt/idea/idea.tar.gz
+    dest: /opt/idea
+  tags:
+    - ide
+```
+
+Then navigate to the binary folder:
+
+```bash
+cd /opt/idea/idea-IC-223.8617.56/bin
+```
+
+Start IntelliJ with the following command:
+
+```bash
+./idea.sh
+```
+
+This demo is done with the help of WSL, we could have extended the task to create a symlink from `/usr/local/bin/` to the binary we just executed. Or when running on your own computer, you would probably have it installed directly on your computer so it will appear with an icon in the application explorer and/or start menu.
+
+Stop the process with `CTRL + C` (this will also stop the running program).
+
+Now navigate back to our folder:
+
+```bash
+cd -
+```
+
+or 
+
+```bash
+cd ~/devenv
 ```
