@@ -69,3 +69,41 @@ When inside the container, run the playbook with the docker tag:
 ```bash
 ansible-playbook install.yml -t docker
 ```
+
+This should return something like this (inside the container):
+
+```bash
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost
+does not match 'all'
+
+PLAY [localhost] *****************************************************************************************
+TASK [Gathering Facts] ***********************************************************************************ok: [localhost]
+
+TASK [Update cache] **************************************************************************************ok: [localhost]
+
+TASK [Install required system packages] ******************************************************************changed: [localhost]
+
+TASK [Add Docker GPG apt Key] ****************************************************************************changed: [localhost]
+
+TASK [Add Docker Repository] *****************************************************************************changed: [localhost]
+
+TASK [Update apt and install docker-ce] ******************************************************************changed: [localhost]
+
+TASK [Ensure group "docker" exists] **********************************************************************
+ok: [localhost]
+
+TASK [Add user to docker group] **************************************************************************
+changed: [localhost]
+
+PLAY RECAP ***********************************************************************************************
+localhost                  : ok=8    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
+Now let's exit the container and add a couple of more CLI tools.
+
+# Neovim
+
+# Tmux
+
+# Xpanes
+
