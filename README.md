@@ -155,7 +155,7 @@ Insert following yml code:
 
 - name: Add Docker Repository
   apt_repository:
-    repo: deb https://download.docker.com/linux/ubuntu focal stable
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_lsb.codename }} stable
     state: present
   tags:
     - docker
@@ -178,27 +178,26 @@ Insert following yml code:
 - name: Add user to docker group
   become: yes
   user:
-    name: "erikro"
+    name: "{{ lookup('env', 'USER') }}"
     groups: docker
     append: yes
   tags:
     - docker
 ```
 
-To verify and run this playbook, we first need to navigate back to location of the playbook file.
+To run this playbook, we first need to navigate back to the location of the playbook file.
 
 ```bash
 cd ..
 ```
 
-Now we can verify the playbook by running:
+Now we can install docker by running:
 
 ```bash
-ansible-playbook install.yml -t docker --check
+ansible-playbook install.yml -t docker
 ```
 
-By adding `--check` we're telling ansible to dry-run the playbook and not apply the changes, just tell us what would be the outcome on the host we would like to run this playbook on.
-This will return and error:
+If you're running with a user without sudo permissions, you will get presented with the following response:
 
 ```bash
 [WARNING]: No inventory was parsed, only implicit localhost is available
@@ -217,5 +216,87 @@ localhost                  : ok=0    changed=0    unreachable=0    failed=1    s
 The error message cleary states `sudo: a password is required`, so let's try running the same command again, but this time pass inn the flag so ansible will prompt for the become (sudo) password.
 
 ```bash
-ansible-playbook install.yml -t docker --ask-become-pass --check
+ansible-playbook install.yml -t docker --ask-become-pass
 ```
+
+Now the result should be something like this:
+
+```bash
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost
+does not match 'all'
+
+PLAY [localhost] *****************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************
+ok: [localhost]
+
+TASK [Update cache] **************************************************************************************
+changed: [localhost]
+
+TASK [Install required system packages] ******************************************************************
+ok: [localhost]
+
+TASK [Add Docker GPG apt Key] ****************************************************************************
+changed: [localhost]
+
+TASK [Add Docker Repository] *****************************************************************************
+changed: [localhost]
+
+TASK [Update apt and install docker-ce] ******************************************************************
+changed: [localhost]
+
+TASK [Ensure group "docker" exists] **********************************************************************
+ok: [localhost]
+
+TASK [Add user to docker group] **************************************************************************
+changed: [localhost]
+
+PLAY RECAP ***********************************************************************************************
+localhost                  : ok=8    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
+To verify docker was installed, run:
+
+```bash
+docker --version
+```
+
+This should return something like: `Docker version 23.0.1, build a5ee5b1`
+
+To see that the playbook is idempotent, we can run the playbook again and now we will get the following response:
+
+```bash
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost
+does not match 'all'
+
+PLAY [localhost] *****************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************
+ok: [localhost]
+
+TASK [Update cache] **************************************************************************************
+changed: [localhost]
+
+TASK [Install required system packages] ******************************************************************
+ok: [localhost]
+
+TASK [Add Docker GPG apt Key] ****************************************************************************
+ok: [localhost]
+
+TASK [Add Docker Repository] *****************************************************************************
+ok: [localhost]
+
+TASK [Update apt and install docker-ce] ******************************************************************
+ok: [localhost]
+
+TASK [Ensure group "docker" exists] **********************************************************************
+ok: [localhost]
+
+TASK [Add user to docker group] **************************************************************************
+ok: [localhost]
+
+PLAY RECAP ***********************************************************************************************
+localhost                  : ok=8    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
+Notice that we now have `ok=8   changed=1`. The change is the update packages task that is not idempotent so it will always return `changed=1`. 
