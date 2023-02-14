@@ -63,3 +63,9 @@ Run the container:
 ```bash
 docker run -rm --it new-computer sh
 ```
+
+When inside the container, run the playbook with the docker tag:
+
+```bash
+ansible-playbook install.yml -t docker
+```
