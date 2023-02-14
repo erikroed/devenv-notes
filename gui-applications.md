@@ -1,7 +1,7 @@
-# Tools
+# GUI Applications
 
 This part we will first quickly install some GUI applications like a browser and a IDE. 
-Later on we will go deeper into CLI-tools and start creating a docker image for testing our ansible script, and verify our script in isolated environments (containers).
+In the next section, we will have a look at CLI-tools and start creating a docker image for testing our ansible script, and verify our script in isolated environments (containers) with docker.
 
 So let's get started with the GUI applications.
 
@@ -140,3 +140,7 @@ or
 ```bash
 cd ~/devenv
 ```
+
+# CLI-Tools and Dockerfile
+
+Go to [cli-tools.md](./cli-tools.md)
