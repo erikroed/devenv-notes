@@ -1,7 +1,9 @@
 # Tools
 
-This part will evolve the playbook to install things like a web browser and a IDE, in this demo we will install IntelliJ.
-We will also write tasks to install CLI tools like neovim, tmux and xpanes.
+This part we will first quickly install some GUI applications like a browser and a IDE. 
+Later on we will go deeper into CLI-tools and start creating a docker image for testing our ansible script, and verify our script in isolated environments (containers).
+
+So let's get started with the GUI applications.
 
 # Web browser
 
@@ -55,5 +57,38 @@ ansible-playbook install.yml -t brave
 This should return something like this:
 
 ```bash
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost
+does not match 'all'
+
+PLAY [localhost] *****************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************
+ok: [localhost]
+
+TASK [required libraries for brave] **********************************************************************
+ok: [localhost]
+
+TASK [Brave Browser archive-keyring.gpg download] ********************************************************
+changed: [localhost]
+
+TASK [Brave Browser PPA setting] *************************************************************************
+changed: [localhost]
+
+TASK [Brave Browser apt installation] ********************************************************************
+changed: [localhost]
+
+PLAY RECAP ***********************************************************************************************
+localhost                  : ok=5    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
+In the newer versions of WSL it is now supported to run GUI applications, so let's verify this works by opening the browser from the startmenu.
+
+# IDE
+
+For the IDE, we will write a task that installs [Jetbrains IntelliJ IDEA](https://www.jetbrains.com/idea/) - since I have a java background. Again, since we're writing our own dev environment, this could instead be a task to install Visual Studio or any other IDE.
+
+Paste the following yml config in `tasks/ide.yml`
+
+```yml
 
 ```
