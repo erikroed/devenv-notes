@@ -61,7 +61,7 @@ First build the image to create a new container with the latest changes:
 Run the container:
 
 ```bash
-docker run -rm --it new-computer sh
+docker run --rm -it new-computer sh
 ```
 
 When inside the container, run the playbook with the docker tag:
