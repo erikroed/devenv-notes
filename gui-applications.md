@@ -143,4 +143,4 @@ cd ~/devenv
 
 # CLI-Tools and Dockerfile
 
-Go to [cli-tools.md](./cli-tools.md)
+Go to [next page](./cli-tools.md)
