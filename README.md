@@ -303,4 +303,4 @@ Notice that we now have `ok=8   changed=1`. The change is the `Update cache` tas
 
 # Install tools
 
-Go to [next page](./tools.md) for instructions to install more tools.
+Go to [next page](./gui-applications.md) for instructions to install more tools.
