@@ -8,6 +8,8 @@ We will also write tasks to install CLI tools like neovim, tmux and xpanes.
 In this example we will install [Brave](https://brave.com/) as the web browser. Since we're configuring our own development environment,
 this can be replaced or extended with similar tasks to install other browsers as well. 
 
+Add the following yml code in `tasks/brave.yml`
+
 ```yml
 - name: required libraries for brave
   become: true
@@ -38,3 +40,20 @@ this can be replaced or extended with similar tasks to install other browsers as
   - brave
 ```
 
+Before we can run this, we need to adjust our `install.yml` playbook with the following line:
+
+```yml
+import_task: tasks/brave.yml
+```
+
+Now we can try running the playbook, but this time with the tag for brave:
+
+```bash
+ansible-playbook install.yml -t brave
+```
+
+This should return something like this:
+
+```bash
+
+```
