@@ -67,7 +67,7 @@ Insert following yml
   tasks:
     - name: Say hello
       debug:
-        msg: Hello World :)
+        msg: Hello, World :)
 ```
 
 Verify playbook by running:
@@ -79,5 +79,20 @@ ansible-playbook install.yml
 This should return following output:
 
 ```bash
-// some output goes here
+[WARNING]: No inventory was parsed, only implicit localhost is available
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit
+localhost does not match 'all'
+
+PLAY [localhost] *******************************************************************************
+
+TASK [Gathering Facts] *************************************************************************
+ok: [localhost]
+
+TASK [Say hello] *******************************************************************************
+ok: [localhost] => {
+    "msg": "Hello, World :)"
+}
+
+PLAY RECAP *************************************************************************************
+localhost                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
