@@ -299,4 +299,4 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=8    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
-Notice that we now have `ok=8   changed=1`. The change is the update packages task that is not idempotent so it will always return `changed=1`. 
+Notice that we now have `ok=8   changed=1`. The change is the `Update cache` task that is not idempotent so it will always return `changed`. 
