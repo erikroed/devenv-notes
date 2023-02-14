@@ -28,4 +28,34 @@ else
 fi
 ```
 
-# Dockerfile
+# Create playbook
+
+We will create a really simple playbook to get us quick up and running.
+First we want to create a playbook that's prints the default Hello World.
+
+```bash
+mkdir devenv
+vi install.yml
+```
+
+Insert following yml
+
+```yml
+- hosts: localhost
+  tasks:
+    - name: Say hello
+      debug:
+        msg: Hello World :)
+```
+
+Verify playbook by running:
+
+```bash
+ansible-playbook install.yml
+```
+
+This should return following output:
+
+```bash
+// some output goes here
+```
