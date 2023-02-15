@@ -106,7 +106,11 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=8    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
-Now we have gotten an brief introduction of how we can test and verify the playbook in an isolated docker container. So let's add a couple of more cli tools.
+Now we have gotten an brief introduction of how we can test and verify the playbook in an isolated docker container. So let's add a couple of more cli tools. But first, we must exit the container:
+
+```bash
+exit
+```
 
 # Other tools
 
