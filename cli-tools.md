@@ -99,11 +99,108 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=8    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
-Now let's exit the container and add a couple of more CLI tools.
+Now we have gotten an brief introduction of how we can test and verify the playbook in an isolated docker container. So let's add a couple of more cli tools.
 
-# Neovim
+# Other tools
 
-# Tmux
+## Neovim
 
-# Xpanes
+Since I'm a vim user, i personally prefer to use Neovim. So here we will add a task to install this
 
+```yml
+- name: Install neovim
+  become: true
+  apt:
+    name: neovim
+    state: present
+    update_cache: yes
+  tags:
+    - vim
+```
+
+## Tmux
+
+When operating in the terminal it could be nice to split the terminal with windows and panes, so let's add tmux to the playbook as well:
+
+```yml
+- name: Install tmux
+  apt:
+    name: tmux
+  tags:
+    - tmux
+```
+
+## Xpanes
+
+In co-operation with tmux we will install xpanes so we can do operations on multiple hosts, in example ping services from hosts to verify connection:
+
+```yml
+- name: Add xpanes repository
+  apt_repository:
+    repo: ppa:greymd/tmux-xpanes
+  tags:
+    - xpanes
+
+- name: Install xpanes
+  apt:
+    name: tmux-xpanes
+    update_cache: yes
+  tags:
+    - xpanes
+```
+
+# Verify updated playbook
+
+No that we have extended the playbook with new tools, let's verify it works. Ofcource in it's own docker container.
+
+Run:
+
+```bash
+./docker-build.sh
+```
+
+Jump into the container:
+
+```bash
+docker run --rm -it new-computer sh
+```
+
+First off, this is a new container so the only thing installed is Ansible. Let's use Ansible to install all the new tools:
+
+```bash
+ansible-playbook install.yml
+```
+
+This time, we don't use any tags. This means the playbook will run all the tasks from top to bottom, so everything we have added should be installed.
+
+Let's verify this by running some commands from the tools we installed.
+
+### Tmux
+
+Let's just start a tmux session
+
+```bash
+tmux
+```
+
+### Docker
+
+```bash
+docker ps
+```
+
+### Neovim
+
+```bash
+nvim test.txt
+```
+
+Demonstrate by adding some text, change and navigate.
+
+### Xpanes
+
+Run ping example stolen from the xpanes github repo:
+
+```bash
+xpanes -c "ping {}" 192.168.0.{1..9}
+```
