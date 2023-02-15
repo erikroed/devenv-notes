@@ -77,6 +77,7 @@ This should return something like this (inside the container):
 does not match 'all'
 
 PLAY [localhost] *****************************************************************************************
+
 TASK [Gathering Facts] ***********************************************************************************
 ok: [localhost]
 
