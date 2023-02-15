@@ -185,6 +185,38 @@ Legg inn følgende tasks:
 
 # Verify updated playbook
 
+Before we can run the playbook, we need to update the `install.yml` file with the latest changes.
+
+```bash
+vi install.yml
+```
+
+The updated file should be like this:
+
+```yml
+- hosts: localhost
+  become: true
+  pre_tasks:
+    - name: Update cache
+      apt:
+        update_cache: true
+      tags:
+        - docker
+        - brave
+        - ide
+        - neovim
+        - tmux
+        - xpanes
+  tasks:
+    - import_tasks: tasks/docker.yml
+    # - import_tasks: tasks/brave.yml
+    # - import_tasks: tasks/ide.yml
+    - import_tasks: tasks/neovim.yml
+    - import_tasks: tasks/tmux.yml
+    - import_tasks: tasks/xpanes.yml
+```
+
+For the purpose of the demo, we will comment out the gui applications to reduce the time used to run the playbook.
 No that we have extended the playbook with new tools, let's verify it works. Ofcource in it's own docker container.
 
 Run:
