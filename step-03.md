@@ -116,7 +116,14 @@ exit
 
 ## Neovim
 
-Since I'm a vim user, i personally prefer to use Neovim. So here we will add a task to install this
+Since I'm a vim user, i personally prefer to use Neovim. So here we will add a task to install this.
+Let's add this in it's own file: `tasks/neovim.yml`
+
+```bash
+vi tasks/neovim.yml
+```
+
+Legg inn følgende task:
 
 ```yml
 - name: Install neovim
@@ -131,7 +138,15 @@ Since I'm a vim user, i personally prefer to use Neovim. So here we will add a t
 
 ## Tmux
 
-When operating in the terminal it could be nice to split the terminal with windows and panes, so let's add tmux to the playbook as well:
+When operating in the terminal it could be nice to split the terminal with windows and panes, so let's add tmux to the playbook as well.
+
+Let's add this in it's own file: `tasks/tmux.yml`
+
+```bash
+vi tasks/tmux.yml
+```
+
+Legg inn følgende task:
 
 ```yml
 - name: Install tmux
@@ -143,7 +158,15 @@ When operating in the terminal it could be nice to split the terminal with windo
 
 ## Xpanes
 
-In co-operation with tmux we will install xpanes so we can do operations on multiple hosts, in example ping services from hosts to verify connection:
+In co-operation with tmux we will install xpanes so we can do operations on multiple hosts, in example ping services from hosts to verify connection.
+
+Let's add this in it's own file: `tasks/xpanes.yml`
+
+```bash
+vi tasks/xpanes.yml
+```
+
+Legg inn følgende tasks:
 
 ```yml
 - name: Add xpanes repository
