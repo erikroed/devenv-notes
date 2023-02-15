@@ -77,17 +77,23 @@ This should return something like this (inside the container):
 does not match 'all'
 
 PLAY [localhost] *****************************************************************************************
-TASK [Gathering Facts] ***********************************************************************************ok: [localhost]
+TASK [Gathering Facts] ***********************************************************************************
+ok: [localhost]
 
-TASK [Update cache] **************************************************************************************ok: [localhost]
+TASK [Update cache] **************************************************************************************
+ok: [localhost]
 
-TASK [Install required system packages] ******************************************************************changed: [localhost]
+TASK [Install required system packages] ******************************************************************
+changed: [localhost]
 
-TASK [Add Docker GPG apt Key] ****************************************************************************changed: [localhost]
+TASK [Add Docker GPG apt Key] ****************************************************************************
+changed: [localhost]
 
-TASK [Add Docker Repository] *****************************************************************************changed: [localhost]
+TASK [Add Docker Repository] *****************************************************************************
+changed: [localhost]
 
-TASK [Update apt and install docker-ce] ******************************************************************changed: [localhost]
+TASK [Update apt and install docker-ce] ******************************************************************
+changed: [localhost]
 
 TASK [Ensure group "docker" exists] **********************************************************************
 ok: [localhost]
