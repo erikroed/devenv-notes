@@ -1,5 +1,7 @@
 # devenv-notes
-Notes to NC Global Tech Talk
+Notes to NC Global Tech Talk.
+
+Video of the presentation is available here https://www.youtube.com/watch?v=8yTcFVQzmJc
 
 It's demotime!
 
